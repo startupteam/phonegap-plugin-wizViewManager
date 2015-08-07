@@ -342,24 +342,6 @@ public class WizWebView extends WebView  {
         int _right = 0;
         int _left = 0;
 
-        if (settings.has("height")) {
-            try {
-                _height = settings.getInt("height");
-            } catch (JSONException e) {
-                // ignore
-                Log.e(TAG, "Error obtaining 'height' in settings");
-            }
-        }
-
-        if (settings.has("width")) {
-            try {
-                _width = settings.getInt("width");
-            } catch (JSONException e) {
-                // ignore
-                Log.e(TAG, "Error obtaining 'width' in settings");
-            }
-        }
-
         if (settings.has("x")) {
             try {
                 _x = settings.getInt("x");
@@ -428,6 +410,28 @@ public class WizWebView extends WebView  {
             } catch (JSONException e) {
                 // ignore
                 Log.e(TAG, "Error obtaining 'bottom' in settings");
+            }
+        }
+
+        if (settings.has("height")) {
+            try {
+                _height = settings.getInt("height");
+            } catch (JSONException e) {
+                // ignore
+                Log.e(TAG, "Error obtaining 'height' in settings");
+            }
+        } else {
+            if (_height != 0) {
+                _height = _height - _top;
+            }
+        }
+
+        if (settings.has("width")) {
+            try {
+                _width = settings.getInt("width");
+            } catch (JSONException e) {
+                // ignore
+                Log.e(TAG, "Error obtaining 'width' in settings");
             }
         }
 
