@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -391,7 +392,7 @@ public class WizWebView extends WebView  {
 
         if (settings.has("top")) {
             try {
-                _top = _top + settings.getInt("top");
+                _top = calculateWithDevicePixelRatio(_top + settings.getInt("top"));
             } catch (JSONException e) {
                 // ignore
                 Log.e(TAG, "Error obtaining 'top' in settings");
@@ -567,6 +568,12 @@ public class WizWebView extends WebView  {
         static void enableUniversalAccess(WebSettings settings) {
             settings.setAllowUniversalAccessFromFileURLs(true);
         }
+    }
+
+    private int calculateWithDevicePixelRatio(int value) {
+        float density = mContext.getResources().getDisplayMetrics().density;
+
+        return (int) Math.round((float)value * density);
     }
 }
 
