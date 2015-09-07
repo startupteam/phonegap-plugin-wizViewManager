@@ -114,6 +114,17 @@ WizViewManager.prototype.hide = function (name, animOptions, success, failure) {
 	this.views[name].hide(animOptions, success, failure);
 };
 
+WizViewManager.prototype.hideAll = function (animOptions, success, failure) {
+	for (var name in this.views) {
+
+		if (!this.views[name]) {
+			return this.throwError(failure, new Error('Hide Error with view name: ' + name + '. View does not exist'));
+		}
+
+		this.views[name].hide(animOptions, success, failure);
+	}
+};
+
 WizViewManager.prototype.remove = function (name, success, failure) {
 	if (!this.views[name]) {
 		return this.throwError(failure, new Error('Hide Error with view name: ' + name + '. View does not exist'));

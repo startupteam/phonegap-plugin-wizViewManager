@@ -103,6 +103,7 @@ Example options Object;
 ### Hide
 
 	wizViewManager.hide(String viewName, JSONObject options, Function success, Function fail);
+	wizViewManager.hideAll(JSONObject options, Function success, Function fail);
 
 **NOTE:- Animations not currently supported on Android, they are ignored**
 
