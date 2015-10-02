@@ -282,17 +282,17 @@ static WizViewManagerPlugin *wizViewManagerInstance = NULL;
 }
 
 - (void)hideWebView:(CDVInvokedUrlCommand *)command {
-        
+
     // Assign arguments
     WizLog(@"Start hideView with callback :  %@", command.callbackId);
     NSString *viewName = [command.arguments objectAtIndex:0];
     NSDictionary *options = nil;
-    if ([[command.arguments objectAtIndex:1] class] == [NSNull class]) {
+    /*if ([[command.arguments objectAtIndex:1] class] == [NSNull class]) {
         // options are null
         WizLog(@"Null options");
     } else {
         options = [command.arguments objectAtIndex:1];
-    }
+    }*/
 
     CDVPluginResult *pluginResultOK = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     
@@ -781,7 +781,7 @@ static WizViewManagerPlugin *wizViewManagerInstance = NULL;
         } else if ([options objectForKey:@"bottom"]) {
             height = screenHeight - [self getWeakLinker:[options objectForKey:@"bottom"] ofType:@"bottom"] - top;
         } else {
-            height = screenHeight;
+            height = screenHeight - top;
         }
         // NSLog(@"HEIGHT: %i", height);
         
@@ -1054,7 +1054,7 @@ static WizViewManagerPlugin *wizViewManagerInstance = NULL;
     [view setFrame:CGRectMake(
                               view.frame.origin.x - viewPadder,
                               view.frame.origin.y,
-                              view.frame.size.width,
+                              view.frame.size.width - 0.1,
                               view.frame.size.height
                               )];
     [view setHidden:FALSE];
